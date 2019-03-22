@@ -96,7 +96,7 @@
 * 发送方每收到一个确认，就把窗口向前滑动一个分组的位置。
 * 接收方一般采用积累确认的方式，不必对接受的分组逐个发送确认，而是在收到几个分组后对按序到达的最后一个分组发送确认。
 * 优点：容易实现，即使确认丢失也不必重传。缺点：不能向发送方反映出接收方已经正确收到的所有分组的信息。
-![6bff3f1646bdb14ce0a945c1fa80fec1.png](evernotecid://34B123B3-B865-40CF-88D5-97B15F40F6BD/appyinxiangcom/23017919/ENResource/p36)
+![连续ARQ](https://github.com/dukezys/Computer-Network/blob/master/pics/ARQ.png)
 
 
 #### TCP可靠传输的实现
