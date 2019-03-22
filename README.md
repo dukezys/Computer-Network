@@ -1,7 +1,5 @@
 # Computer-Network
-# 计算机网络
-
-   * [计算机网络](#计算机网络)
+   * [Computer-Network](#Computer-Network)
       * [运输层](#运输层)
          * [运输层协议概述](#运输层协议概述)
             * [进程之间的通信](#进程之间的通信)
@@ -107,7 +105,7 @@
 
 * 无差错情况
 * 出现差错：接收方接收时检测到了差错，丢弃，不会发送任何信息。发送端超过一段时间没有收到确认，就认为刚才发送的分组丢失了，重传前面发送过的分组，这时**超时重传**。实现超时重传需要一个**超时计时器**，如果在超时计时器到期之前收到了对方的确认，就撤销已设置的超时计时器。
-..
+![](https://github.com/dukezys/Computer-Network/blob/master/pics/StopWait.png)
 
 * **注意三点：**
     1) 发送方发送完一个分组后，必须暂时保留已发送的分组的副本，只有收到相应的确认后才能清除暂时保留的分组副本。
@@ -190,7 +188,7 @@ NewRTTd = (1 - B) * (OldRTTd) + B * |RTTs - NewRTT|
 
 * 运输连接有三个阶段：连接建立、数据传送、连接释放。TCP连接的建立采用客户服务器方式，主动发起连接建立的应用进程叫客户client，而被动等待连接建立的应用进程叫做服务器server。
 ##### TCP的连接建立
-![a44cae0333fff9a9e63bb2ec92786bc3.png](evernotecid://34B123B3-B865-40CF-88D5-97B15F40F6BD/appyinxiangcom/23017919/ENResource/p34)
+![](https://github.com/dukezys/Computer-Network/blob/master/pics/TCPthree-way%20handshake.png)
 
 * 一开始，B的TCP服务器进程创建传输控制块TCB，然后处于LISTEN状态。
 * A的TCP客户进程也是先创建TCB，打算建立TCP连接时，向B发出连接请求报文段，这是**首部中SYN = 1**，同时选择一个**初始序列号seq = x。**TCP规定，SYN报文段不能携带数据，但要消耗一个序列号。这时TCP客户进入SYN-SENT状态。
@@ -198,7 +196,7 @@ NewRTTd = (1 - B) * (OldRTTd) + B * |RTTs - NewRTT|
 * TCP客户进程收到B的确认后，还要向B给出确认。确认报文段的**ACK为1，确认号ack = y + 1，序号seq = x + 1。**ACK报文段可以携带数据，但**如果不携带数据则不消耗序号。**
 * 为什么A最后还要发送一次确认？主要是为了防止已失效的连接请求报文段突然又传送到了B。
 ##### TCP的连接释放
-![ef4a160ef87aecb7848f83f196e09c94.png](evernotecid://34B123B3-B865-40CF-88D5-97B15F40F6BD/appyinxiangcom/23017919/ENResource/p35)
+![](https://github.com/dukezys/Computer-Network/blob/master/pics/TCPfour-way%20handshake.png)
 
 * A的应用进程先向其TCP发出连接释放报文段，并停止再发送数据，主动关闭TCP连接。A把连接释放报文段首部的终止控制位**FIN置1，序号seq = u**，等于前面已传送的数据的最后一个字节的序号加1。A进入FIN-WAIT-1。
 * B收到释放报文后立即发出确认，**确认号ack = u + 1，报文段序号为v**，等于B前面已传送过的数据的最后一个字节的序号加1。B进入CLOSE-WAIT状态。TCP服务器进程这时应通知高层应用进程，这时TCP连接处于半关闭状态，A到B的连接释放，但B到A还没有。
